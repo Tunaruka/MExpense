@@ -29,9 +29,11 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
     private FragmentMainBinding binding;
     private BookListAdapter adapter;
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle("Trips list");
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         binding = FragmentMainBinding.inflate(inflater, container, false);
 

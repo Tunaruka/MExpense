@@ -8,7 +8,6 @@ import com.google.android.material.R.style;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import android.widget.Spinner;
 import com.example.mexpense.databinding.FragmentEditorBinding;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class EditorFragment extends Fragment {
 
@@ -29,14 +29,15 @@ public class EditorFragment extends Fragment {
     private Button dateButton;
     private Spinner tripTypeSpinner;
 
+
     public static EditorFragment newInstance() {
         return new EditorFragment();
     }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
+        //set fragment title
+        getActivity().setTitle("Details");
         eViewModel = new ViewModelProvider(this).get(EditorViewModel.class);
         binding = FragmentEditorBinding.inflate(inflater, container, false);
         dateButton = binding.tripDatePickerButton;
@@ -48,8 +49,10 @@ public class EditorFragment extends Fragment {
             initDatePicker();
             datePickerDialog.show();
         });
+
         //Type Spinner codes
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.trip_type_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.trip_type_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tripTypeSpinner.setAdapter(adapter);
         tripTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -66,6 +69,8 @@ public class EditorFragment extends Fragment {
                 // Another interface callback
             }
         });
+
+
 
         String bookId = getArguments().getString("bookId");
         binding.title.setText(bookId);
