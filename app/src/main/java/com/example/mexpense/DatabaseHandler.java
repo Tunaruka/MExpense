@@ -47,7 +47,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, trip.getDestination());
         values.put(KEY_TYPE, trip.getType());
         values.put(KEY_DATE, trip.getDate());
-        values.put(KEY_RISK, trip.isRisk());
+        values.put(KEY_RISK, trip.getRisk());
         values.put(KEY_TITLE, trip.getTitle());
         values.put(KEY_TITLE, trip.getTitle());
 

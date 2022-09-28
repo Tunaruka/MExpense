@@ -6,10 +6,10 @@ public class TripEntity {
     private String destination;
     private String type;
     private String date;
-    private boolean risk;
+    private String risk;
     private String description;
 
-    public TripEntity(String id, String title, String destination, String type, String date, boolean risk, String description) {
+    public TripEntity(String id, String title, String destination, String type, String date, String risk, String description) {
         this.id = id;
         this.title = title;
         this.destination = destination;
@@ -19,7 +19,7 @@ public class TripEntity {
         this.description = description;
     }
 
-    public TripEntity(String title, String destination, String type, String date, boolean risk, String description) {
+    public TripEntity(String title, String destination, String type, String date, String risk, String description) {
         this.title = title;
         this.destination = destination;
         this.type = type;
@@ -68,11 +68,11 @@ public class TripEntity {
         this.date = date;
     }
 
-    public boolean isRisk() {
+    public String getRisk() {
         return risk;
     }
 
-    public void setRisk(boolean risk) {
+    public void setRisk(String risk) {
         this.risk = risk;
     }
 
