@@ -17,17 +17,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.mexpense.data.BookEntity;
 import com.example.mexpense.data.SampleDataProvider;
+import com.example.mexpense.data.TripEntity;
 import com.example.mexpense.databinding.FragmentMainBinding;
 
+import java.util.List;
 import java.util.Optional;
 
 public class MainFragment extends Fragment implements BookListAdapter.ListItemListener {
 
     private MainViewModel mViewModel;
     private FragmentMainBinding binding;
-    private BookListAdapter adapter;
+    private BookListAdapter bookListAdapter;
+    private TripListAdapter tripListAdapter;
 
 
     @Override
@@ -43,22 +48,35 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
                 getContext(),
                 (new LinearLayoutManager(getContext())).getOrientation())
         );
-        mViewModel.bookList.observe(
-                getViewLifecycleOwner(),
-                bookList -> {
-//                    System.out.println("#books: " + bookList.size());
-                    //https://developer.android.com/topic/libraries/architecture/livedata
-                    //https://developer.android.com/topic/libraries/architecture/livedata#work_livedata
-                    //when bookList has changes, what to do?
-                    //define an Observer of <List<BookEntity>> using lambda to implement onChanged()
-                    //this observer will watch for any changes in List<BookEntity> then
-                    //create new adapter with new book list and display it on recyclerView
-                    //                    adapter = new BookListAdapter(bookList);
-                    adapter = new BookListAdapter(bookList, MainFragment.this);
-                    binding.recyclerView.setAdapter(adapter);
-                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                }
-        );
+
+        rv.setAdapter(bookListAdapter);
+        rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        rv.setHasFixedSize(true);
+        DatabaseHandler databaseHandler = new DatabaseHandler(this.getActivity());
+        List<TripEntity> tripEntities = databaseHandler.getAllTrips();
+
+        if (tripEntities.size() > 0){
+            TripListAdapter tripListAdapter = new TripListAdapter(tripEntities, this::onItemClick);
+        } else {
+            Toast.makeText(this.getActivity(), "There is no data", Toast.LENGTH_SHORT).show();
+        }
+//        mViewModel.bookList.observe(
+//                getViewLifecycleOwner(),
+//                bookList -> {
+////                    System.out.println("#books: " + bookList.size());
+//                    //https://developer.android.com/topic/libraries/architecture/livedata
+//                    //https://developer.android.com/topic/libraries/architecture/livedata#work_livedata
+//                    //when bookList has changes, what to do?
+//                    //define an Observer of <List<BookEntity>> using lambda to implement onChanged()
+//                    //this observer will watch for any changes in List<BookEntity> then
+//                    //create new adapter with new book list and display it on recyclerView
+//                    //                    adapter = new BookListAdapter(bookList);
+//                    bookListAdapter = new BookListAdapter(bookList, MainFragment.this);
+//                    binding.recyclerView.setAdapter(bookListAdapter);
+//                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                }
+//        );
+
         return binding.getRoot();
 
 //        return inflater.inflate(R.layout.fragment_main, container, false);
@@ -78,12 +96,5 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
         }
     }
 
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//    TODO: Use the ViewModel
-//    }
 
 }

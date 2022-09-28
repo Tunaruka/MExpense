@@ -1,7 +1,7 @@
 package com.example.mexpense.data;
 
 public class TripEntity {
-    private String id;
+    private int id;
     private String title;
     private String destination;
     private String type;
@@ -9,7 +9,7 @@ public class TripEntity {
     private String risk;
     private String description;
 
-    public TripEntity(String id, String title, String destination, String type, String date, String risk, String description) {
+    public TripEntity(int id, String title, String destination, String type, String date, String risk, String description) {
         this.id = id;
         this.title = title;
         this.destination = destination;
@@ -28,11 +28,11 @@ public class TripEntity {
         this.description = description;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -82,9 +82,5 @@ public class TripEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public TripEntity(String id) {
-        this.id = id;
     }
 }
