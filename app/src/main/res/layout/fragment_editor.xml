@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     tools:context=".EditorFragment">
+
 
     <EditText
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
@@ -16,14 +18,14 @@
         android:focusableInTouchMode="true"
         android:hint="Title"
         android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tripTitleLabel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/destination"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -31,90 +33,78 @@
         android:focusableInTouchMode="true"
         android:hint="Destination"
         android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <EditText
-        android:id="@+id/pages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:focusableInTouchMode="true"
-        android:hint="Pages"
-        android:inputType="number"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destination" />
+        app:layout_constraintStart_toEndOf="@+id/tripDesLabel"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
-        android:id="@+id/datePickerButton"
+        android:id="@+id/tripDatePickerButton"
         style="?android:spinnerStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="#595959"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateOfTheTrip"
+        app:layout_constraintStart_toEndOf="@+id/tripDateLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tripTypeSpinner"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
 
     <TextView
-        android:id="@+id/dateOfTheTrip"
-        android:layout_width="0dp"
+        android:id="@+id/tripDateLabel"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Date of the Trip"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        android:text="Date:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pages" />
+        app:layout_constraintTop_toTopOf="@+id/tripDatePickerButton" />
 
     <TextView
-        android:id="@+id/requireRisk"
+        android:id="@+id/requireRiskLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-
         android:text="Requires risk assessment?"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePickerButton" />
+        app:layout_constraintTop_toBottomOf="@+id/tripDatePickerButton" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/descriptionTextField" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/descriptionTextField"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:focusableInTouchMode="true"
         android:gravity="top|start"
-        android:hint="Description"
+        android:hint="Optional"
         android:inputType="textMultiLine"
         android:lines="8"
         android:maxLines="5"
         android:minLines="1"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descriptionLabel"
         app:layout_constraintTop_toBottomOf="@+id/riskRadioGroup" />
 
     <RadioGroup
@@ -122,12 +112,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requireRisk">
+        app:layout_constraintTop_toBottomOf="@+id/requireRiskLabel">
 
         <RadioButton
             android:id="@+id/riskYes"
@@ -135,7 +125,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:checked="false"
-            android:focusableInTouchMode="true"
             android:text="Yes" />
 
         <RadioButton
@@ -143,9 +132,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
-            android:focusableInTouchMode="true"
             android:text="No" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/tripTitleLabel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Title:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/tripDesLabel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Destination:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/destination" />
+
+    <TextView
+        android:id="@+id/tripTypeLabel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Type:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tripTypeSpinner" />
+
+    <Spinner
+        android:id="@+id/tripTypeSpinner"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tripTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/destination" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Delete"
+        android:backgroundTint="#F44336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
