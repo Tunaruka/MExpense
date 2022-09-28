@@ -12,7 +12,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.mexpense.databinding.FragmentEditorBinding;
 
@@ -24,6 +27,7 @@ public class EditorFragment extends Fragment {
     private FragmentEditorBinding binding;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    private Spinner tripTypeSpinner;
 
     public static EditorFragment newInstance() {
         return new EditorFragment();
@@ -35,14 +39,31 @@ public class EditorFragment extends Fragment {
 
         eViewModel = new ViewModelProvider(this).get(EditorViewModel.class);
         binding = FragmentEditorBinding.inflate(inflater, container, false);
+        dateButton = binding.tripDatePickerButton;
+        tripTypeSpinner = binding.tripTypeSpinner;
 
-        dateButton = binding.datePickerButton;
+        //Date Button codes
         dateButton.setText(showDateText());
-        dateButton.setOnClickListener(new View.OnClickListener() {
+        dateButton.setOnClickListener(v -> {
+            initDatePicker();
+            datePickerDialog.show();
+        });
+        //Type Spinner codes
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.trip_type_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tripTypeSpinner.setAdapter(adapter);
+        tripTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onClick(View v) {
-                initDatePicker();
-                datePickerDialog.show();
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                // An item was selected. You can retrieve the selected item using
+                // parent.getItemAtPosition(pos)
+                parent.getItemAtPosition(pos);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
             }
         });
 
@@ -51,6 +72,7 @@ public class EditorFragment extends Fragment {
 
         return binding.getRoot();
     }
+
 
     private String showDateText() {
         String dateText = "Select date";

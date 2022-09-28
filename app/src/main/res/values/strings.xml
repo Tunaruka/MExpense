@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MExpense</string>
+    <string-array
+        name="trip_type_array">
+        <item>Conference</item>
+        <item>Client meeting</item>
+        <item>Trade fair</item>
+        <item>Incentive travel</item>
+        <item>Other</item>
+    </string-array>
 </resources>
