@@ -48,7 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, trip.getTitle());
-        values.put(KEY_DESCRIPTION, trip.getDestination());
+        values.put(KEY_DESTINATION, trip.getDestination());
         values.put(KEY_TYPE, trip.getType());
         values.put(KEY_DATE, trip.getDate());
         values.put(KEY_RISK, trip.getRisk());
@@ -70,7 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(2),
                 cursor.getString(3),
                 cursor.getString(4),
-                cursor.getString(5),
+                cursor.getInt(5),
                 cursor.getString(6)
         );
         return student;
@@ -91,11 +91,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.getString(2),
                     cursor.getString(3),
                     cursor.getString(4),
-                    cursor.getString(5),
+                    cursor.getInt(5),
                     cursor.getString(6)
             );
             tripList.add(trip);
             cursor.moveToNext();
+
         }
         return tripList;
     }

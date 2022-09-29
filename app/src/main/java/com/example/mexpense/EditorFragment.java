@@ -83,9 +83,9 @@ public class EditorFragment extends Fragment {
                 String title = binding.title.getText().toString();
                 String destination = binding.destination.getText().toString();
                 String type = binding.tripTypeSpinner.getSelectedItem().toString();
-                String date = binding.tripDatePickerButton.toString();
-                String risk = binding.riskRadioGroup.toString();
-                String description = binding.descriptionTextField.toString();
+                String date = binding.tripDatePickerButton.getText().toString();
+                int risk = binding.riskRadioGroup.getCheckedRadioButtonId();
+                String description = binding.descriptionTextField.getText().toString();
 
                 DatabaseHandler databaseHandler = new DatabaseHandler(getActivity());
                 TripEntity tripEntity = new TripEntity(title, destination, type, date, risk, description);

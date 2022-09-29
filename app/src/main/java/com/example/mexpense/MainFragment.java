@@ -49,7 +49,7 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
                 (new LinearLayoutManager(getContext())).getOrientation())
         );
 
-        rv.setAdapter(bookListAdapter);
+        rv.setAdapter(tripListAdapter);
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         rv.setHasFixedSize(true);
 
@@ -64,7 +64,7 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
 //        mViewModel.bookList.observe(
 //                getViewLifecycleOwner(),
 //                bookList -> {
-////                    System.out.println("#books: " + bookList.size());
+//                    System.out.println("#books: " + bookList.size());
 //                    //https://developer.android.com/topic/libraries/architecture/livedata
 //                    //https://developer.android.com/topic/libraries/architecture/livedata#work_livedata
 //                    //when bookList has changes, what to do?
