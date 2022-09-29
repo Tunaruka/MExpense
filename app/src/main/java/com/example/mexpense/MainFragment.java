@@ -39,7 +39,7 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Trips list");
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         binding = FragmentMainBinding.inflate(inflater, container, false);
 
         RecyclerView rv = binding.recyclerView;
@@ -52,9 +52,10 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
         rv.setAdapter(bookListAdapter);
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         rv.setHasFixedSize(true);
+
+        //Show list of trip
         DatabaseHandler databaseHandler = new DatabaseHandler(this.getActivity());
         List<TripEntity> tripEntities = databaseHandler.getAllTrips();
-
         if (tripEntities.size() > 0){
             TripListAdapter tripListAdapter = new TripListAdapter(tripEntities, this::onItemClick);
         } else {
@@ -76,6 +77,7 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
 //                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 //                }
 //        );
+        binding.btnAddTrip.setOnClickListener(v -> this.onItemClick(Constants.NEW_TRIP_ID));
 
         return binding.getRoot();
 
@@ -84,17 +86,15 @@ public class MainFragment extends Fragment implements BookListAdapter.ListItemLi
     }
 
     @Override
-    public void onItemClick(String bookID) {
+    public void onItemClick(String tripId) {
         //Tìm book trong mViewModel
-        Optional<BookEntity> be = mViewModel.bookList.getValue()
-                .stream().filter(b -> b.getId() == bookID).findFirst();
-        if (be.isPresent()){
+//        Optional<BookEntity> be = mViewModel.bookList.getValue()
+//                .stream().filter(b -> b.getId() == bookID).findFirst();
+//        if (be.isPresent()){
             Bundle bundle = new Bundle();
-            bundle.putString("bookId", bookID);
+            bundle.putString("tripId", tripId);
             Navigation.findNavController(getView())
                     .navigate(R.id.editorFragment, bundle);
-        }
+//        }
     }
-
-
 }

@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+
+import com.example.mexpense.data.BookEntity;
+import com.example.mexpense.data.TripEntity;
 import com.google.android.material.R.style;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mexpense.databinding.FragmentEditorBinding;
 
@@ -27,6 +31,7 @@ public class EditorFragment extends Fragment {
     private FragmentEditorBinding binding;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    private Button saveButton;
     private Spinner tripTypeSpinner;
 
 
@@ -38,10 +43,11 @@ public class EditorFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         //set fragment title
         getActivity().setTitle("Details");
-        eViewModel = new ViewModelProvider(this).get(EditorViewModel.class);
+//        eViewModel = new ViewModelProvider(this).get(EditorViewModel.class);
         binding = FragmentEditorBinding.inflate(inflater, container, false);
         dateButton = binding.tripDatePickerButton;
         tripTypeSpinner = binding.tripTypeSpinner;
+        saveButton = binding.btnSave;
 
         //Date Button codes
         dateButton.setText(showDateText());
@@ -70,10 +76,29 @@ public class EditorFragment extends Fragment {
             }
         });
 
+        //Save button codes
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = binding.title.getText().toString();
+                String destination = binding.destination.getText().toString();
+                String type = binding.tripTypeSpinner.getSelectedItem().toString();
+                String date = binding.tripDatePickerButton.toString();
+                String risk = binding.riskRadioGroup.toString();
+                String description = binding.descriptionTextField.toString();
+
+                DatabaseHandler databaseHandler = new DatabaseHandler(getActivity());
+                TripEntity tripEntity = new TripEntity(title, destination, type, date, risk, description);
+                databaseHandler.addTrip(tripEntity);
+                Toast.makeText(getActivity(), "Successfully added new trip", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
 
-        String bookId = getArguments().getString("bookId");
-        binding.title.setText(bookId);
+
+//        String bookId = getArguments().getString("bookId");
+//        binding.title.setText(bookId);
 
         return binding.getRoot();
     }
